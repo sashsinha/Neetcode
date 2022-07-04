@@ -5,11 +5,8 @@ class Solution {
  public:
   std::unordered_map<char, int> getCharCounts(const std::string& s) {
     std::unordered_map<char, int> char_counts;
-    for (const char ch : s) {
-      auto[it, present] = char_counts.insert({ch, 0});
-      if (!present) {
-        ++(it->second);
-      }
+    for (const char& c : s) {
+      char_counts[c]++;
     }
     return char_counts;
   }
