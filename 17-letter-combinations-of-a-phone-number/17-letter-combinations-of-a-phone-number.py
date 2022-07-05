@@ -17,7 +17,9 @@ class Solution:
                     result.append(''.join(path))
                 return
             for letter in Solution.DIGITS_TO_LETTERS[digits[i]]:
-                helper(i + 1, path + [letter])
+                path.append(letter)
+                helper(i + 1, path)
+                path.pop()
         result = []
         helper(0, [])
         return result
