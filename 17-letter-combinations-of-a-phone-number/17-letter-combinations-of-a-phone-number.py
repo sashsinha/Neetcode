@@ -11,7 +11,7 @@ class Solution:
     }
 
     def letterCombinations(self, digits: str) -> List[str]:
-        def helper(i: index, path: list[str]) -> None:
+        def helper(i: int, path: list[str]) -> None:
             if i == len(digits):
                 if path:
                     result.append(''.join(path))
