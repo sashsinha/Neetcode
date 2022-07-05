@@ -1,27 +1,35 @@
 from dataclasses import dataclass
 
-@dataclass(frozen=True)
-class StackElement:
+@dataclass
+class ElementWithCount:
     element: int
-    stack_min: int
+    count: int
 
 class MinStack:
 
     def __init__(self):
         self.stack = []
+        self.min_stack = []
 
     def push(self, val: int) -> None:
-        curr_min = self.getMin() if self.stack else val
-        self.stack.append(StackElement(val, val if val < curr_min else curr_min))
+        self.stack.append(val)
+        if not self.min_stack or val < self.min_stack[-1].element:
+            self.min_stack.append(ElementWithCount(val, 1))
+        elif val == self.min_stack[-1].element:
+            self.min_stack[-1].count += 1
 
     def pop(self) -> None:
+        if self.min_stack[-1].element == self.stack[-1]:
+            self.min_stack[-1].count -= 1
+        if self.min_stack[-1].count == 0:
+            self.min_stack.pop()
         self.stack.pop()
 
     def top(self) -> int:
-        return self.stack[-1].element
+        return self.stack[-1]
 
     def getMin(self) -> int:
-        return self.stack[-1].stack_min
+        return self.min_stack[-1].element
 
 
 # Your MinStack object will be instantiated and called as such:
