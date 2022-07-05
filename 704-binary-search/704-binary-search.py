@@ -1,13 +1,6 @@
+from bisect import bisect_left
+
 class Solution:
-    def search(self, nums: List[int], target: int) -> int:
-        lo, hi = 0, len(nums) - 1
-        while lo <= hi:
-            mi = (lo + hi) // 2
-            val = nums[mi]
-            if val < target:
-                lo = mi + 1
-            elif val > target:
-                hi = mi - 1
-            else:
-                return mi
-        return -1
+    def search(self, nums: list[int], target: int) -> int:
+        idx = bisect_left(nums, target)
+        return idx if idx < len(nums) and nums[idx] == target else -1
