@@ -18,7 +18,7 @@ class WordDictionary:
                 return self.end_word_delimiter in curr
             ch = word[i]
             if ch == '.':
-                return any(helper(i + 1, curr[x]) for x in curr)
+                return any(helper(i + 1, curr[x]) for x in curr if x != self.end_word_delimiter)
             else:
                 if ch not in curr:
                     return False
