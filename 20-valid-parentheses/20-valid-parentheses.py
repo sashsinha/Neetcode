@@ -1,16 +1,17 @@
 class Solution:
-    OPENING_TO_CLOSING = {'[': ']', '(': ')', '{': '}'}  # Should use immutabledict
-    CLOSING_TO_OPENING = {']': '[', ')': '(', '}': '{'}  # Should use immutabledict
+
     
     def isValid(self, s: str) -> bool:
+        OPENING_BRACKETS = {'[', '(', '{'}  # Better to use frozenset.
+        CLOSING_BRACKETS_TO_OPENING_BRACKETS = {']': '[', ')': '(', '}': '{'}  # Better to use immutabledict.
         if not s:
             return True
         stack = []
         for ch in s:
-            if ch in Solution.OPENING_TO_CLOSING:
+            if ch in OPENING_BRACKETS:
                 stack.append(ch)
-            elif ch in Solution.CLOSING_TO_OPENING:
-                if not stack or stack[-1] != Solution.CLOSING_TO_OPENING[ch]:
+            elif ch in CLOSING_BRACKETS_TO_OPENING_BRACKETS:
+                if not stack or stack[-1] != CLOSING_BRACKETS_TO_OPENING_BRACKETS[ch]:
                     return False
                 stack.pop()
         return not stack
